@@ -1,0 +1,19 @@
+#cloud-config
+write_files:
+ - content: |
+    chef_server_url  "https://api.opscode.com/organizations/kreedy-testing-at-chef"
+    validation_client_name "kreedy-testing-at-chef-validator"
+   permissions: '0644'
+   path: /etc/chef/client.rb
+ - content: |
+    {"run_list":[]}
+   permissions: '0644'
+   path: /etc/chef/first-boot.json
+ - content: |
+    -----BEGIN RSA PRIVATE KEY-----
+    -----END RSA PRIVATE KEY-----
+   permissions: '0600'
+   path: /etc/chef/validation.pem
+runcmd:
+ - /usr/bin/curl -L https://www.chef.io/chef/install.sh | /bin/bash
+ - /usr/bin/chef-client
