@@ -32,3 +32,4 @@ dist
 cloud-config.yml
 # TODO: move key copying to package task
 *.pem
+config.js

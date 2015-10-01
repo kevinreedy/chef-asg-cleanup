@@ -1,0 +1,11 @@
+var config = {
+  user_name: null, // (required unless using 'client_name') a chef user
+  client_name: null, // (required unless using 'user_name') a chef client
+  key_path: null, // (required unless using 'key') path to private key in this directory.
+  key: null, // (required unless using 'key_path') contents of private key
+  organization: null, // (required unless using 'url') organization name for use with hosted chef
+  url: null, // (required unless using 'organization') url for use with private chef server
+  ca: null // (optional) if this key is omitted, then the default CA chain will be used. If null, the client will operate unsafely and not validate the server's certificate, it set to a certificate list explicitly, that list will be used as the CA chain.
+};
+
+module.exports = config;

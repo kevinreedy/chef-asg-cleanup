@@ -34,12 +34,8 @@ exports.handler = function(event, context) {
 
   // Set up connection to Chef server
   var chef = new ChefApi();
-  var options = {
-    user_name: "kreedy-chef",
-    key_path: "/Users/kreedy/.chef/kreedy-chef.pem",
-    organization: "kreedy-testing-at-chef"
-  }
-  chef.config(options);
+  var config = require("./config")
+  chef.config(config);
 
   // Find Chef node by EC2 Instance ID
   getNodeByEc2Id(chef, event.EC2InstanceId, function(err, node) {
