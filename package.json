@@ -1,0 +1,17 @@
+{
+  "name": "chef-asg-cleanup",
+  "version": "0.1.0",
+  "description": "Set up AWS Lambda to clean up Chef Nodes and Clients after Autoscaling events",
+  "main": "cleanup.js",
+  "dependencies": {
+    "chef-api": "^0.5.2",
+    "grunt-aws-lambda": "^0.10.0",
+    "grunt": "^0.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Reedy",
+  "license": "Apache-2.0"
+}
