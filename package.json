@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Set up AWS Lambda to clean up Chef Nodes and Clients after Autoscaling events",
   "main": "index.js",
+  "engine": "node 0.10.36",
   "dependencies": {
     "chef-api": "^0.5.2"
   },

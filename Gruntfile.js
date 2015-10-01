@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-aws-lambda');
 
+  grunt.registerTask('deploy', ['lambda_package', 'lambda_deploy']);
+
   grunt.initConfig({
     lambda_invoke: {
       default: {
