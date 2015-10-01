@@ -25,11 +25,12 @@ function getNodeByEc2Id(chef, id, cb) {
 exports.handler = function(event, context) {
   // Verify this event is valid
   if (event.Event != "autoscaling:EC2_INSTANCE_TERMINATE") {
-    throw new Error("Lambda event payload is not an autoscaling terminate event");
+    // TODO: this is firing falsely
+    context.fail(new Error("Lambda event payload is not an autoscaling terminate event"));
   }
 
   if (!event.EC2InstanceId.match(/^i-/)) {
-    throw new Error("Couldn't find instance id in Lambda event payload");
+    context.fail(new Error("Couldn't find instance id in Lambda event payload"));
   }
 
   // Set up connection to Chef server
@@ -40,7 +41,8 @@ exports.handler = function(event, context) {
   // Find Chef node by EC2 Instance ID
   getNodeByEc2Id(chef, event.EC2InstanceId, function(err, node) {
     if (err) {
-      throw err;
+      console.log(event);
+      context.fail(err);
     }
 
     console.log("Deleting node and client '" + node.name + "'");
@@ -48,14 +50,14 @@ exports.handler = function(event, context) {
     // Delete Chef Node
     chef.deleteNode(node.name, function(err, res) {
       if (err) {
-        throw err;
+        context.fail(err);
       }
     });
 
     // Delete Chef Client
     chef.deleteClient(node.name, function(err, res) {
       if (err) {
-        throw err;
+        context.fail(err);
       }
     });
 
