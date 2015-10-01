@@ -16,4 +16,6 @@ write_files:
    path: /etc/chef/validation.pem
 runcmd:
  - /usr/bin/curl -L https://www.chef.io/chef/install.sh | /bin/bash
+ - /bin/mkdir -p  /etc/chef/ohai/hints
+ - /usr/bin/touch /etc/chef/ohai/hints/ec2.json
  - /usr/bin/chef-client
