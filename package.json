@@ -4,11 +4,12 @@
   "description": "Set up AWS Lambda to clean up Chef Nodes and Clients after Autoscaling events",
   "main": "cleanup.js",
   "dependencies": {
-    "chef-api": "^0.5.2",
+    "chef-api": "^0.5.2"
+  },
+  "devDependencies": {
     "grunt-aws-lambda": "^0.10.0",
     "grunt": "^0.4.5"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
