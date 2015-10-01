@@ -1,22 +1,4 @@
 {
-    "StatusCode": "InProgress",
-    "Service": "AWS Auto Scaling",
-    "AutoScalingGroupName": "kreedy-lambda-test",
-    "Description": "Terminating EC2 instance: i-1ca5a4c9",
-    "ActivityId": "a37274fc-f2dd-4098-9100-db32bf923c4d",
     "Event": "autoscaling:EC2_INSTANCE_TERMINATE",
-    "Details": {
-        "Availability Zone": "us-east-1a",
-        "Subnet ID": "subnet-86f6f5c0"
-    },
-    "AutoScalingGroupARN": "arn:aws:autoscaling:us-east-1:862552916454:autoScalingGroup:0f13929d-9a84-406f-a82f-87750b17f28c:autoScalingGroupName/kreedy-lambda-test",
-    "Progress": 50,
-    "Time": "2015-09-25T00:06:09.146Z",
-    "AccountId": "862552916454",
-    "RequestId": "a37274fc-f2dd-4098-9100-db32bf923c4d",
-    "StatusMessage": "",
-    "EndTime": "2015-09-25T00:06:09.146Z",
-    "EC2InstanceId": "i-1ca5a4c9",
-    "StartTime": "2015-09-25T00:05:21.311Z",
-    "Cause": "At 2015-09-25T00:04:58Z a user request update of AutoScalingGroup constraints to min: 0, max: 1, desired: 0 changing the desired capacity from 1 to 0.  At 2015-09-25T00:05:21Z an instance was taken out of service in response to a difference between desired and actual capacity, shrinking the capacity from 1 to 0.  At 2015-09-25T00:05:21Z instance i-2af9808a was selected for termination."
+    "EC2InstanceId": "i-1ca5a4c9"
 }
