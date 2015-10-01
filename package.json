@@ -10,6 +10,9 @@
     "grunt-aws-lambda": "^0.10.0",
     "grunt": "^0.4.5"
   },
+  "bundledDependencies": [
+    "chef-api"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

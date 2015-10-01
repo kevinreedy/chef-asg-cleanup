@@ -9,48 +9,59 @@ function getNodeByEc2Id(chef, id, cb) {
     }
 
     if (res.total == 0) {
-      cb(new Error("AWS Instance '" + id + "' not found"), null);
+      cb(new Error("AWS Instance '" + id + "' not found on Chef server"), null);
     }
 
     if (res.total > 1) {
-      cb(new Error("More than one instance found with name '" + id + "'"), null);
+      cb(new Error("More than one instance found with name '" + id + "' found on Chef server"), null);
     }
 
     cb(null, res.rows[0]);
   });
 }
 
-// Set up connection to Chef server
-var chef = new ChefApi();
-var options = {
-  user_name: "kreedy-chef",
-  key_path: "/Users/kreedy/.chef/kreedy-chef.pem",
-  organization: "kreedy-testing-at-chef"
-}
-chef.config(options);
-
-// Find Chef node by EC2 Instance ID
-getNodeByEc2Id(chef, "i-1ca5a4c9", function(err, node) {
-  if (err) {
-    throw err;
+exports.handler = function(event, context) {
+  // Verify this event is valid
+  if (event.Event != "autoscaling:EC2_INSTANCE_TERMINATE") {
+    throw new Error("Lambda event payload is not an autoscaling terminate event");
+  }
+  
+  if (!event.EC2InstanceId.match(/^i-/)) {
+    throw new Error("Couldn't find instance id in Lambda event payload");
   }
 
-  console.log("Deleting node and client '" + node.name + "'");
+  // Set up connection to Chef server
+  var chef = new ChefApi();
+  var options = {
+    user_name: "kreedy-chef",
+    key_path: "/Users/kreedy/.chef/kreedy-chef.pem",
+    organization: "kreedy-testing-at-chef"
+  }
+  chef.config(options);
 
-  // Delete Chef Node
-  chef.deleteNode(node.name, function(err, res) {
+  // Find Chef node by EC2 Instance ID
+  getNodeByEc2Id(chef, event.EC2InstanceId, function(err, node) {
     if (err) {
       throw err;
     }
-    console.log("Node '" + node.name + "' deleted");
-  });
 
-  // Delete Chef Client
-  chef.deleteClient(node.name, function(err, res) {
-    if (err) {
-      throw err;
-    }
+    console.log("Deleting node and client '" + node.name + "'");
 
-    console.log("Client '" + node.name + "' deleted");
+    // Delete Chef Node
+    chef.deleteNode(node.name, function(err, res) {
+      if (err) {
+        throw err;
+      }
+      console.log("Node '" + node.name + "' deleted");
+    });
+
+    // Delete Chef Client
+    chef.deleteClient(node.name, function(err, res) {
+      if (err) {
+        throw err;
+      }
+
+      console.log("Client '" + node.name + "' deleted");
+    });
   });
-});
+}
