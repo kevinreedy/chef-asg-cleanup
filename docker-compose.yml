@@ -1,0 +1,5 @@
+deploy:
+  build: .
+  command: grunt deploy
+  volumes:
+   - ~/.aws:/root/.aws/:ro
