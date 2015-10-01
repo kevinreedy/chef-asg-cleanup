@@ -1,4 +1,9 @@
 {
-    "Event": "autoscaling:EC2_INSTANCE_TERMINATE",
-    "EC2InstanceId": "i-1ca5a4c9"
+  "Records": [
+    {
+      "Sns": {
+        "Message": "{\"Event\":\"autoscaling:EC2_INSTANCE_TERMINATE\",\"EC2InstanceId\":\"i-1ca5a4c9\"}"
+      }
+    }
+  ]
 }

@@ -23,13 +23,15 @@ function getNodeByEc2Id(chef, id, cb) {
 }
 
 exports.handler = function(event, context) {
+  // TODO: do we need to iterate over records?
+  var snsEvent = JSON.parse(event.Records[0].Sns.Message);
+
   // Verify this event is valid
-  if (event.Event != "autoscaling:EC2_INSTANCE_TERMINATE") {
-    // TODO: this is firing falsely
+  if (snsEvent.Event != "autoscaling:EC2_INSTANCE_TERMINATE") {
     context.fail(new Error("Lambda event payload is not an autoscaling terminate event"));
   }
 
-  if (!event.EC2InstanceId.match(/^i-/)) {
+  if (!snsEvent.EC2InstanceId.match(/^i-/)) {
     context.fail(new Error("Couldn't find instance id in Lambda event payload"));
   }
 
@@ -39,9 +41,9 @@ exports.handler = function(event, context) {
   chef.config(config);
 
   // Find Chef node by EC2 Instance ID
-  getNodeByEc2Id(chef, event.EC2InstanceId, function(err, node) {
+  getNodeByEc2Id(chef, snsEvent.EC2InstanceId, function(err, node) {
     if (err) {
-      console.log(event);
+      console.log(snsEvent);
       context.fail(err);
     }
 
