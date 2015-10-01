@@ -13,7 +13,7 @@ function getNodeByEc2Id(chef, id, cb) {
     }
 
     if (res.total > 1) {
-      cb("More than one instance found with name '" + id + "'");
+      cb(new Error("More than one instance found with name '" + id + "'"), null);
     }
 
     cb(null, res.rows[0]);
