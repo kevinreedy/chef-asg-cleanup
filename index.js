@@ -1,3 +1,5 @@
+"use strict";
+
 var ChefApi = require("chef-api");
 
 // ChefApi connection, EC2 Instance ID, Callback
@@ -25,7 +27,7 @@ exports.handler = function(event, context) {
   if (event.Event != "autoscaling:EC2_INSTANCE_TERMINATE") {
     throw new Error("Lambda event payload is not an autoscaling terminate event");
   }
-  
+
   if (!event.EC2InstanceId.match(/^i-/)) {
     throw new Error("Couldn't find instance id in Lambda event payload");
   }
