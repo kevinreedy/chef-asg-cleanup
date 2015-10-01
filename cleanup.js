@@ -9,7 +9,7 @@ function getNodeByEc2Id(chef, id, cb) {
     }
 
     if (res.total == 0) {
-      cb("AWS Instance '" + id + "' not found");
+      cb(new Error("AWS Instance '" + id + "' not found"), null);
     }
 
     if (res.total > 1) {
@@ -29,8 +29,28 @@ var options = {
 }
 chef.config(options);
 
-getNodeByEc2Id(chef, "i-1ca5a4c", function(err, res) {
+// Find Chef node by EC2 Instance ID
+getNodeByEc2Id(chef, "i-1ca5a4c9", function(err, node) {
   if (err) {
     throw err;
   }
+
+  console.log("Deleting node and client '" + node.name + "'");
+
+  // Delete Chef Node
+  chef.deleteNode(node.name, function(err, res) {
+    if (err) {
+      throw err;
+    }
+    console.log("Node '" + node.name + "' deleted");
+  });
+
+  // Delete Chef Client
+  chef.deleteClient(node.name, function(err, res) {
+    if (err) {
+      throw err;
+    }
+
+    console.log("Client '" + node.name + "' deleted");
+  });
 });
