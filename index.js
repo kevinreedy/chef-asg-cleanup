@@ -52,15 +52,16 @@ exports.handler = function(event, context) {
       if (err) {
         context.fail(err);
       }
-    });
 
-    // Delete Chef Client
-    chef.deleteClient(node.name, function(err, res) {
-      if (err) {
-        context.fail(err);
-      }
-    });
+      // Delete Chef Client
+      chef.deleteClient(node.name, function(err, res) {
+        if (err) {
+          context.fail(err);
+        }
 
-    context.succeed("Successfully deleted node and client '" + node.name + "'")
+        // Success!
+        context.succeed("Successfully deleted node and client '" + node.name + "'")
+      });
+    });
   });
 }
