@@ -30,6 +30,6 @@ dist
 
 .DS_Store
 cloud-config.yml
-# TODO: move key copying to package task
+# TODO: move key copying and chmodding to package task
 *.pem
 config.js

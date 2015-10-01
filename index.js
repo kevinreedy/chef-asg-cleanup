@@ -50,7 +50,6 @@ exports.handler = function(event, context) {
       if (err) {
         throw err;
       }
-      console.log("Node '" + node.name + "' deleted");
     });
 
     // Delete Chef Client
@@ -58,8 +57,8 @@ exports.handler = function(event, context) {
       if (err) {
         throw err;
       }
-
-      console.log("Client '" + node.name + "' deleted");
     });
+
+    context.succeed("Successfully deleted node and client '" + node.name + "'")
   });
 }
