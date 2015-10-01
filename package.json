@@ -2,7 +2,7 @@
   "name": "chef-asg-cleanup",
   "version": "0.1.0",
   "description": "Set up AWS Lambda to clean up Chef Nodes and Clients after Autoscaling events",
-  "main": "cleanup.js",
+  "main": "index.js",
   "dependencies": {
     "chef-api": "^0.5.2"
   },
