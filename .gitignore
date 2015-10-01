@@ -28,4 +28,5 @@ build/Release
 node_modules
 dist
 
+.DS_Store
 cloud-config.yml
