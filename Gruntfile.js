@@ -15,6 +15,9 @@ module.exports = function(grunt) {
       default: {
         options: {
           // Task-specific options go here.
+          include_files: [
+            'node_modules/chef-api/node_modules/ursa/build/*'
+          ]
         }
       }
     },
