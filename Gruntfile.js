@@ -4,13 +4,6 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', ['lambda_package', 'lambda_deploy']);
 
   grunt.initConfig({
-    lambda_invoke: {
-      default: {
-        options: {
-          // Task-specific options go here.
-        }
-      }
-    },
     lambda_package: {
       default: {
         options: {
@@ -28,14 +21,6 @@ module.exports = function(grunt) {
             'node_modules/chef-api/node_modules/ursa/build/Release/obj.target/ursaNative/src/*'
           ]
         }
-      }
-    },
-    lambda_deploy: {
-      default: {
-        options: {
-          // Task-specific options go here.
-        },
-        arn: 'arn:aws:lambda:us-east-1:862552916454:function:kreedy-lambda-test'
       }
     },
   });

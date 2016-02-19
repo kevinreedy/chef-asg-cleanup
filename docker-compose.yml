@@ -1,5 +1,5 @@
-deploy:
+package:
   build: .
-  command: grunt deploy
+  command: grunt lambda_package
   volumes:
-   - ~/.aws:/root/.aws/:ro
+   - ./dist:/usr/src/app/dist
